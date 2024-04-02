@@ -65,9 +65,8 @@ public class BankApp {
         System.out.print("Enter ID for new account: ");
         String id = scanner.next();
         System.out.print("Enter balance for new account: ");
-        double balance = scanner.nextDouble();
 
-        // Check for duplicate ID (optional)
+        double balance = scanner.nextDouble();
         if (idMap.containsKey(id)) {
             System.out.println("Error: Account ID already exists.");
             return;
@@ -125,8 +124,8 @@ public class BankApp {
                 choice = scanner.nextInt();
             } catch (NoSuchElementException e) {
                 System.out.println("Invalid input. Please enter a number (1-5).");
-                scanner.nextLine(); // Clear scanner buffer after invalid input
-                choice = -1; // Set choice to avoid unintended actions
+                scanner.nextLine();
+                choice = -1;
             }
 
             switch (choice) {
