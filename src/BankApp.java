@@ -84,7 +84,7 @@ public class BankApp {
 
         System.out.println("\nList of Accounts:");
         System.out.println("ID\t\tBalance");
-        System.out.println("---------\t-------");
+        System.out.println("----------------");
         for (Map.Entry<String, IDBalance> entry : idMap.entrySet()) {
             IDBalance account = entry.getValue();
             System.out.println(entry.getKey() + "\t\t$" + account.balance);
@@ -187,7 +187,7 @@ public class BankApp {
             System.out.print("Enter ID to which to transfer: ");
             IDBalance toAccount = callID(scanner, idMap);
 
-            if (toAccount != null && !toAccount.equals(fromAccount)) { // Prevent transferring to the same account
+            if (toAccount != null && !toAccount.equals(fromAccount)) {
                 System.out.print("Enter transfer amount: ");
                 double transferAmount = scanner.nextDouble();
 
@@ -216,16 +216,14 @@ public class BankApp {
         }
     }
 
-
+    // Save accounts to CSV file
     public static void saveAccountsToFile(HashMap<String, IDBalance> idMap) {
         String csvFileName = "accounts.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFileName))) {
-            // Writing header
             writer.write("ID,Balance");
             writer.newLine();
 
-            // Writing account data
             for (IDBalance account : idMap.values()) {
                 writer.write(account.id + "," + account.balance);
                 writer.newLine();
@@ -236,16 +234,14 @@ public class BankApp {
         }
     }
 
-    // Method to load accounts from CSV file
+    // Load accounts from CSV file
     public static HashMap<String, IDBalance> loadAccountsFromFile() {
         HashMap<String, IDBalance> idMap = new HashMap<>();
         String csvFileName = "accounts.csv";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFileName))) {
             String line;
-            // Skip header line
             reader.readLine();
-            // Reading account data
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length == 2) {
